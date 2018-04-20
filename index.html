@@ -1,0 +1,663 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>DevOps in Divante</title>
+    <meta charset="utf-8">
+    <style>
+      @import url(https://fonts.googleapis.com/css?family=Open+Sans&subset=latin-ext);
+      @import url(https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic);
+      @import url(https://fonts.googleapis.com/css?family=Ubuntu+Mono:400,700,400italic);
+
+      body { 
+        font-family: 'Droid Serif'; 
+      }
+      h1, h2, h3 {
+        font-family: 'Open Sans', sans-serif;
+        font-weight: normal;
+      }
+      .remark-code, .remark-inline-code { font-family: 'Ubuntu Mono'; }
+      .remark-slide-content {
+/*        background: url(images/divante_logo_small.png);
+        background-repeat: no-repeat;
+        background-color: white;
+        background-attachment: fixed;
+        background-position: left top; 
+        background-size: 200px;*/
+      }
+      img[alt=Divante] { width: 200px; }
+    </style>
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle
+name: divante-template
+layout: true
+
+---
+
+template: divante-template
+# DevOps in Divante
+### Story about people, technology and mistakes
+
+[//]: <> (It will be a story how we tried implemented DevOps to our company)
+[//]: <> (I'm going to say more about culture, about evolution and about mistakes and success)
+[//]: <> (I'm going to say less about technology)
+[//]: <> (Sometimes technology and tools which we used will be like turning points in my story)
+[//]: <> (Sometimes technology will be a solution for our problems)
+
+---
+
+template: divante-template
+# About me
+
+.left[
+- 10 years in IT
+- 4 years in Divante
+]
+
+[//]: <> (At the beginning I will say a few words about myself)
+[//]: <> (I have worked 10 years in IT)
+[//]: <> (Fout last years I have worked in Divante)
+[//]: <> (My career in IT I started as PHP developer, in Divante too)
+[//]: <> (Because in Divante I started work as PHP developer whole story will be told from a perspective a developer who became a devops)
+
+---
+
+template: divante-template
+# About Divante
+
+![Divante](images/divante_logo_small.png)
+
+We've been operating for 10 years. We are a software house. We have ~20 projects. Our specialization are E-commerce solutions.
+
+[//]: <> (Few important facts about my company. We are a software house. We have ca. 20 projects. Our specialization are E-commerce solutions.)
+
+---
+
+template: divante-template
+.left[
+*The promises of DevOps are clear. They offer faster iterations, allowing ops to keep up with agile development and make an IT organization more responsive to business needs.* [DevOps: What a Wonderful World it Would Be
+](https://devops.com/what-a-wonderful-world-it-would-be/)
+]
+
+[//]: <> (Tu powiedzieć coś o tym że to jest bardzo ładny cytat tego co daje nam devops i przez tą prezentację chciałbym pokazać jak przez kilka lat z firmy która technologicznie była w średniowieczu udało się nam dojść do momentu, w którym zaczynamy pracować na najnowszysz technologiach jednocześnie rozwijając się i rozwiązując różne problemy dzięki czemu stajemy się coraz bardziej konkurencyjn na rynku, tu trzeba zaznaczyć, że to wszystko jest opowiedziane z perspektywy kogoś kto jest programistą)
+
+---
+
+template: divante-template
+
+# Zero Iteration
+(2014 - 2015)
+
+[//]: <> (Whole story is divided to several partst)
+[//]: <> (It was first year of my work in Divante)
+[//]: <> (In my previous company we worked according to DevOps culture, DevOps approach)
+[//]: <> (We worked on AWS, we had Chef, automated deployment procedure. In general we worked with newest technologies)
+[//]: <> (And I moved to Divante)
+
+---
+
+template: divante-template
+## How did we work?
+
+[//]: <> (It is very good question. How did we work?)
+
+---
+
+template: divante-template
+### We had only git
+
+[//]: <> (It is true. In 2014 we had only git.)
+[//]: <> (We deployed new code on production changing git tag, if after deploy we had to flush cache, restarted some app or do anything else, we had to remember about it)
+[//]: <> (For me it was small shock)
+[//]: <> (I suppose not only for me)
+
+---
+
+template: divante-template
+#### Books published before 2014
+
+.left[
+- *Agile Software Development, Principles, Patterns, and Practices* Robert C. Martin (2003)
+- *Test Driven Development: By Example* Kent Beck (2003)
+- *Architecting the Cloud: Design Decisions for Cloud Computing Service Models (SaaS, PaaS, and IaaS)* Michael J. Kavis (2013)
+- *The Phoenix Project: A Novel about IT, DevOps, and Helping Your Business Win Paperback* Gene Kim, Kevin Behr, George Spafford (2014)
+]
+
+[//]: <> (For comparison here you have a few books published before 2014)
+
+---
+
+template: divante-template
+#### Tools launched before 2014
+
+.left[
+- **Amazon Web Service** March 2006
+- **Chef** January 2009
+- **Windows 8** August 2013
+]
+
+[//]: <> (And a few popular tools and their date of launched)
+[//]: <> (If you think we were like dinosaurs in IT world I agree with you)
+[//]: <> (Let's continue, the question was "How did we work?")
+
+---
+
+template: divante-template
+### We had three departments
+
+.left[
+- Development
+- Maintenance
+- Hosting
+]
+
+50 IT specialists, 0 DevOps
+
+[//]: <> (In that time we had 40 IT specialist, mostly developers. Of cource we hadn't any DevOps)
+[//]: <> (Because we had tree department we created a lot of problems with knowledge flow)
+[//]: <> (Applications development and maintenance ware in to different departments)
+[//]: <> (Two first departments ware responsible for application but most of developers ware afraid Paweł - head of hosting department)
+
+---
+
+template: divante-template
+## Typical problems
+
+---
+
+template: divante-template
+### It works on my machine
+
+[//]: <> (I know it looks like a joke, but realy we had a lot of issues like this)
+[//]: <> (Why? We hadn't development environment. Most of developers installed projects on laptop.)
+[//]: <> (It can work with first project, but with secound it have to create confilicts)
+[//]: <> (In that time for us it was realy big issue)
+
+---
+
+template: divante-template
+### Secret knowledge
+
+[//]: <> (We didn't have any tool to create documentation)
+[//]: <> (Even if someone at the beginning of project created some documentation, added some notes, after a few changes in project the documentation very fast became outdated)
+[//]: <> (We needed tool to collect knowledge about projects)
+[//]: <> (Code is the best documentation)
+
+---
+
+template: divante-template
+### We didn't know what happen in other projects
+
+[//]: <> (We are a software house which specialize in e-commerce solution)
+[//]: <> (In that time we worked with Magento, only with Magento)
+[//]: <> (And in each one project we solved the same problems)
+[//]: <> (We didn't had any reusable modules repository)
+[//]: <> (Even if we had any module we didn't know about it)
+[//]: <> (We didn't know what our colleagues done in other projects)
+
+---
+
+template: divante-template
+### Who will go to Paweł?
+
+[//]: <> (It was one of the most important problems)
+[//]: <> (Who will go to Paweł?)
+[//]: <> (He is rarely wrong)
+[//]: <> (If you want to argue with him you need strong arguments, but he can admit when he is wrong.)
+
+---
+
+template: divante-template
+### And nothing more?
+
+[//]: <> (Of cource we had many other problems. I try show you which kind of issues we had)
+[//]: <> (In general we had big problem with sharing knowlage, with communication and cooperation)
+[//]: <> (We should have discuss ex. ElasticSearch vs Solr, but we still implemented Solr from skrach in our projects)
+
+---
+
+template: divante-template
+## Summary
+### Mistakes
+
+.left[
+- We complained too less
+]
+
+[//]: <> (I don't know if I should talking about mistakes.)
+[//]: <> (I was one of new developers, I had tasks, I had projects, I solved problems for my own)
+[//]: <> (I was a guy who complains a lot)
+[//]: <> (Maybe it is a reason why now I'm staying here)
+
+---
+
+
+template: divante-template
+## Summary
+### Successes
+
+.left[
+- We had finished projects and clients still worked with us
+- We built team which wanted to change something
+]
+
+[//]: <> (We wonted to change something)
+[//]: <> (Not everything was ideas of our team, our bosses saw problems too)
+[//]: <> (We got time to develop some solution)
+
+---
+
+template: divante-template
+# First Iteration
+(2015 - 2016)
+
+[//]: <> (Now you now how we worked at the beginning of my carrier in divante)
+[//]: <> (Now I going to tell you a few words about solution of our problems)
+[//]: <> (It will be like Proof of concept)
+
+---
+
+template: divante-template
+## How did we solve problems of previous iteration?
+
+---
+
+template: divante-template
+
+    problem:
+
+### Secret knowledge & It works on my machine
+
+solution:
+
+### Vagrant + Chef
+
+[//]: <> (Everything worked on the small steps method)
+[//]: <> (In one project we tested vagrant and bash scrips to bootstarap dev env)
+[//]: <> (In other we tested chef)
+[//]: <> (After a few weeks, maybe months we joined forces and we created vagrant + chef dev env)
+[//]: <> (After a few months we had dev end in every single project)
+[//]: <> (pierwszy commit w repo divante-chef "Date:   Tue Jan 20 11:09:39 2015 +0100" )
+
+
+---
+
+template: divante-template
+
+    problem:
+
+### We didn't know what happen in other projects
+
+solutions:
+
+### Leaders Meeting
+### Cross projects code review
+### Reusable modules repository
+### Vagrant + Chef
+
+[//]: <> (We had a few ideas how to improve cross project communication, information flow)
+[//]: <> (One idea was Leaders Meeting.)
+[//]: <> (It was typical meeting, we met in one room, we were talking about our work, about ideas how to improve our work)
+[//]: <> (There we had "project overview")
+[//]: <> (grupa code review powstała w Jul 15, 2015 11:47am)
+
+---
+
+template: divante-template
+
+    problem:
+
+### Who will go to Paweł?
+
+solution:
+
+[//]: <> (It is not a mistake)
+[//]: <> (In this teration we didn't find any solution for this problem)
+
+---
+
+template: divante-template
+## How did we work?
+
+---
+
+template: divante-template
+### We had two departments
+
+.left[
+- Development
+- Hosting
+]
+
+80 IT specialists, 0 DevOps
+
+[//]: <> (We grew, at the end of this era we had 80 IT specialists, 0 DevOps)
+
+---
+
+template: divante-template
+### We had few tools more
+
+git, vagrant, chef
+
+---
+
+template: divante-template
+## Typical problems
+
+---
+
+template: divante-template
+### It works on my machine
+
+[//]: <> (At the beginning of this era vagrant + chef was very good solution for dev env)
+[//]: <> (But we had one big problem. Our hosting team didn't us our chef cookbooks to manage test, stage and prod env)
+[//]: <> (They used Ansible)
+[//]: <> (And a tool which was supposed to solve problems became our problem)
+[//]: <> (We showed one thing virtualizatin can be easy)
+[//]: <> (You need only one command to start project)
+[//]: <> (I think most important thing was ability to participate in maintenance it, everyone could make our work easiesta and everyone could reduced "Secret knowlage")
+[//]: <> (Why did we choose Chef? I know Chef.)
+
+[//]: <> (sporo projektów migrujemy na chef jednak to nie jest kod reużyteczny często są to jakieś copy/past, ktoś popada w paranoję z wersjami i w nowszych debianach to nie do końca działa, jednak hosting robi to inaczej, pierwszy commit w repo ansible hosting "Date:   Mon Aug 31 09:13:51 2015 +0200" powoli zaczynamy się rozjeżdżać z hostingiem. W tym miejscu udało się nam rozwiązać problem wiedzy tajemnej ale nie roziązaliśmy problemu błędów, ktoś może zapytać to co nie mieliście testów, no nie mieliśmy nie mieliśmy nawet narzędzie żeby je odpalać i automatyzować cały proces)
+
+[//]: <> (Podsumować co dał nam chef - programiści odkryli, że można pracować inaczej, odkryli kożyści automatyzacji i sami zaczęli uczestniczyć w tym procesie przez dodawanie i modufikowanie cookbooków)
+
+---
+
+template: divante-template
+### Leaders Meeting
+array() vs []
+[//]: <> (We improved information flow, we knew mora about projects, we had first reusable modules repository)
+[//]: <> (But we grew, we had more over dozen leaders on meeting)
+[//]: <> (And we were talking about array() vs []. We spent a lot of time on unproductive discussions)
+
+---
+
+template: divante-template
+### Who will go to Paweł?
+
+[//]: <> (I know it is boring.)
+
+---
+
+template: divante-template
+### Of course we had a lot of other problems but...
+
+[//]: <> (We spent a lot of time on discussions)
+[//]: <> (We had to do something with chef)
+[//]: <> (We didn't time to other things)
+
+---
+
+template: divante-template
+## Summary
+### Mistakes
+
+.left[
+- We used Chef without consultations with hosting team
+- We couldn't control large meetings
+]
+
+---
+
+template: divante-template
+## Summary
+### Successes
+
+.left[
+- We was familiar with virtualization
+- We lerned new tools
+- We reduced secret knowledge
+- We improved information flow
+]
+
+---
+
+template: divante-template
+# Second Iteration
+(2016-2017)
+
+[//]: <> (It is first era where we have full time DevOps Enginiers)
+
+---
+
+template: divante-template
+## How did we solve problems of previous iteration?
+
+---
+
+template: divante-template
+
+    problem:
+
+### It works on my machine
+
+solution:
+
+### Vagrant + Ansible
+
+[//]: <> (Our hosting team has ansible and we used it to create dev env)
+[//]: <> (Now first time in our hostory we have dev env identicall like test/stage and prod environment)
+[//]: <> (We solved this problem once and for all)
+[//]: <> (It was easy, we could have solved this problem 2 years earlier if we had talked with hosting)
+---
+
+template: divante-template
+
+    problem:
+
+### Leaders Meeting
+
+solution:
+
+### Continuous Integration
+### Smallest meetings focusing on one technology
+
+[//]: <> (dodanie pierwszeg runnera dla SCA Nov 2, 2016 10:55am)
+[//]: <> (z maszyną nie można dyskutować)
+
+---
+
+template: divante-template
+
+    question:
+
+### Who will go to Paweł?
+
+answer:
+
+### DevOps
+
+[//]: <> (I became full time devops)
+[//]: <> (In this time we had two devopses and we tried builing devops team)
+[//]: <> (I stood on the first line questions from developers about tools, about servers, about everything it isn't PHP)
+[//]: <> (Sometimes they annoyed me because they asked me. They didn't discuss who will go to Paweł, they asked me)
+[//]: <> (We found solution)
+
+---
+
+template: divante-template
+## How did we work?
+
+---
+
+template: divante-template
+### We still had two departments
+
+.left[
+- Development
+- Hosting
+]
+
+### but we started migration to tribes
+
+80 IT specialists, 1-2 DevOps
+
+[//]: <> (We had problem with communication not only in one department, we had problem with communication between departments)
+
+---
+
+template: divante-template
+### We had more and more new tools
+
+git, vagrant, ansible, capistrano, gitlab-ci + SCA + tests, docker, rancher, anonymizer, ...
+
+---
+
+template: divante-template
+## Typical problems
+
+---
+
+template: divante-template
+
+    problem:
+
+### We spent a lot of time to setup new projects
+
+solution:
+
+### Tool to automate that process
+
+[//]: <> (Why do I give you problem and solution)
+[//]: <> (In this era we had a processes. We had a tools to managing the processes)
+[//]: <> (Only we had to optimalize it, automatize where it was possible)
+[//]: <> (We done things faster)
+[//]: <> (On the previous slide you can see how many tools we used in this time and you can compare it with era before)
+[//]: <> (We gave teams tools and they used it)
+[//]: <> (We had full time DevOpses but we achieved more. Everyone can be a DevOps)
+[//]: <> (We achieved some level of culture, we have learned good habits)
+[//]: <> (Tools can be changed, good habits staying)
+[//]: <> (and we have changed tools)
+
+---
+
+template: divante-template
+## Summary
+### Mistakes
+
+.left[
+- DevOps became a bottleneck
+- Small mistakes
+]
+
+[//]: <> (We made mistakes, but because we worked more flexible we faster )
+
+---
+
+template: divante-template
+## Summary
+### Successes
+
+.left[
+- We work faster
+- We are more flexible
+- We automated processes
+- Everyone can be a DevOps
+]
+
+---
+
+template: divante-template
+# Third Iteration
+(2018)
+
+---
+
+template: divante-template
+## How do we work?
+
+---
+
+template: divante-template
+### We have four tribes and Hosting Department
+
+80 IT specialists, 5 DevOps
+
+---
+
+template: divante-template
+### We work with newest technologies
+
+git, vagrant, ansible, capistrano, gitlab-ci + SCA + tests, docker, kubernetes
+
+---
+
+template: divante-template
+### We have four tribes and Hosting Department
+
+80 IT specialists, 5 DevOps
+
+---
+
+template: divante-template
+# DevOps challenges in software house
+
+.left[
+- Clients
+- Developers, Teams
+- Long iterations
+- Software house
+]
+
+[//]: <> (Challenges facing DevOps in software house)
+[//]: <> (Clients - czasami nie chcą usprawnień, optymalizacji bo często wiąże się to z inwestycja czasu)
+[//]: <> (Developers, teams - oni czasami boją się głównie zmian, od razu mówią "Klient się na to nie zgodzi")
+[//]: <> (long iterations - iteraacje to nowe projety, poprawiamy błędy z poprzednich wdrażamy rozwiązania, które wydaje się mam że pomoga, w zeszłym tygodniu zmigrowaliśmy jeden projetk z chef do docker)
+[//]: <> (zz)
+
+---
+
+template: divante-template
+## Different projects, different problems
+
+---
+
+template: divante-template
+# Advices
+
+---
+
+template: divante-template
+## Tools are not DevOps, but without tools is difficult to introduce the DevOps culture
+
+---
+
+template: divante-template
+## EaaC
+Everything as a Code
+
+---
+
+template: divante-template
+![Yoda](images/yoda.jpg)
+
+[//]: <> (Nie ma jednej drogi aby osiągnąć sukces)
+
+[//]: <> (Niestety nie ma złotej rady, trzeba powoli iść do przodu, eksperymentować i pamiętać o tym że pomyłki się zdażają, tylko trzeba się do nich przyznać, nie należy też nikogo zmuszać, raczej zachęcać i stawiać na działania oddolne niż)
+
+---
+
+template: divante-template
+# Questions?
+
+---
+
+template: divante-template
+# Thank you!
+mkoszutowski@divante.pl
+
+    </textarea>
+    <script src="https://remarkjs.com/downloads/remark-latest.min.js">
+    </script>
+    <script>
+      remark.macros.scale = function (percentage) {
+        var url = this;
+        return '<img src="' + url + '" style="width: ' + percentage + '" />';
+      };
+      var slideshow = remark.create();
+    </script>
+  </body>
+</html>
